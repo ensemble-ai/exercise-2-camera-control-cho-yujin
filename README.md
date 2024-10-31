@@ -1,5 +1,10 @@
 # Camera Control Exercise
 
+## Notes
+
+Turned off audio (it was too loud)
+Remind me to turn it back on!!
+
 ## Description
 
 Your goal is to create several swappable camera control scripts for a top-down terraforming simulator.
