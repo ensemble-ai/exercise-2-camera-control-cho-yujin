@@ -47,6 +47,7 @@ cameras = [NodePath("../PushBoxCamera"), NodePath("../PushBoxCamera2"), NodePath
 [node name="PushBoxCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
 target = NodePath("../Vessel")
+draw_camera_logic = true
 
 [node name="debug" type="Label" parent="PushBoxCamera"]
 visible = false
@@ -58,6 +59,7 @@ script = ExtResource("3_4fllx")
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
 target = NodePath("../Vessel")
 dist_above_target = 20.0
+draw_camera_logic = true
 
 [node name="debug" type="Label" parent="PushBoxCamera2"]
 visible = false
@@ -69,6 +71,7 @@ script = ExtResource("3_4fllx")
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
 target = NodePath("../Vessel")
 dist_above_target = 100.0
+draw_camera_logic = true
 
 [node name="debug" type="Label" parent="PushBoxCamera3"]
 visible = false
@@ -80,6 +83,7 @@ script = ExtResource("3_4fllx")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
 script = ExtResource("3_qfeow")
 target = NodePath("../Vessel")
+draw_camera_logic = true
 
 [node name="debug" type="Label" parent="PositionLockCamera"]
 visible = false
