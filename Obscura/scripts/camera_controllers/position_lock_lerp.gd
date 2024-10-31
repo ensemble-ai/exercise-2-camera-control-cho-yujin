@@ -2,6 +2,11 @@ class_name PositionLockLerp
 extends CameraControllerBase
 
 
+@export var follow_speed:float = 0.1
+@export var catchup_speed:float = 0.2
+@export var leash_distance:float = 10.0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -16,8 +21,13 @@ func _process(delta: float) -> void:
 	if draw_camera_logic:
 		draw_logic()
 	
-	global_position.x = target.global_position.x
-	#global_position.z = target.global_position.z
+	var weight:float = follow_speed
+	if target.velocity == Vector3.ZERO:
+		weight = catchup_speed
+	
+	var lerp = global_position.lerp(target.global_position, weight)
+	global_position.x = lerp.x
+	global_position.z = lerp.z
 	
 	super(delta)
 	

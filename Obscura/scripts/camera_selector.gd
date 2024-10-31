@@ -14,7 +14,6 @@ func _ready():
 
 
 func _process(_delta):
-	print(current_controller)
 	if Input.is_action_just_pressed("cycle_camera_controller"):
 		current_controller += 1
 		if len(cameras) < current_controller+1:
