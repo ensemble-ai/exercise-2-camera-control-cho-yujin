@@ -23,8 +23,8 @@ func _process(delta: float) -> void:
 		draw_logic()
 		
 	super(delta)
-		
-	
+
+
 func draw_logic() -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var immediate_mesh := ImmediateMesh.new()
@@ -53,7 +53,7 @@ func draw_logic() -> void:
 	immediate_mesh.surface_end()
 
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	#material.albedo_color = Color.WHITE
+	material.albedo_color = Color.WHITE
 	
 	var mesh_instance_inner := MeshInstance3D.new()
 	var immediate_mesh_inner := ImmediateMesh.new()

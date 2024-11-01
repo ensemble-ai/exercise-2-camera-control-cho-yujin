@@ -2,10 +2,10 @@ class_name LerpSmoothingTargetFocus
 extends CameraControllerBase
 
 
-@export var lead_speed:float
-@export var catchup_delay_duration:float
-@export var catchup_speed:float
-@export var leash_distance:float
+@export var lead_speed:float = 0.8
+@export var catchup_delay_duration:float = 0.1
+@export var catchup_speed:float = 2
+@export var leash_distance:float = 1.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +21,14 @@ func _process(delta: float) -> void:
 		
 	if draw_camera_logic:
 		draw_logic()
+		
+	var weight:float = lead_speed
+	if target.velocity == Vector3.ZERO:
+		weight = 0.5
+		
+	var lerp = global_position.lerp(target.global_position, weight)
+	global_position.x = lerp.x
+	global_position.z = lerp.z
 	
 	super(delta)
 	
