@@ -2,11 +2,11 @@ class_name SpeedUpPushZone
 extends CameraControllerBase
 
 
-@export var push_ratio:float
+@export var push_ratio:float = 0.9
 @export var pushbox_top_left:Vector2 = Vector2(-10, 6)
-@export var pushbox_bottom_right:Vector2 = Vector2(10, -6)
-@export var speedup_zone_top_left:Vector2 = Vector2(-8, 4)
-@export var speedup_zone_bottom_right:Vector2 = Vector2(8, -4)
+@export var pushbox_bottom_right:Vector2 = Vector2(12, -6)
+@export var speedup_zone_top_left:Vector2 = Vector2(-6, 4)
+@export var speedup_zone_bottom_right:Vector2 = Vector2(6, -3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,7 +21,42 @@ func _process(delta: float) -> void:
 		
 	if draw_camera_logic:
 		draw_logic()
-		
+
+	# inner zone logic
+	var inner_left:float = speedup_zone_top_left.x + global_position.x
+	var inner_right:float = speedup_zone_bottom_right.x + global_position.x
+	var inner_top:float = speedup_zone_top_left.y + global_position.z
+	var inner_bottom:float = speedup_zone_bottom_right.y + global_position.z
+	
+	if (
+		target.global_position.x > inner_left
+		and target.global_position.x < inner_right
+		and target.global_position.z < inner_top
+		and target.global_position.z > inner_bottom
+	):
+		super(delta)
+		return
+	
+	#speedup zone logic
+	var camera_speed:Vector3 = push_ratio * target.velocity * delta
+	global_position.x += camera_speed.x
+	global_position.z += camera_speed.z
+	
+	# outer pushbox logic
+	var pushbox_left = pushbox_top_left.x + global_position.x
+	var pushbox_right = pushbox_bottom_right.x + global_position.x
+	var pushbox_top = pushbox_top_left.y + global_position.z
+	var pushbox_bottom = pushbox_bottom_right.y + global_position.z
+	
+	if target.global_position.x < pushbox_left:
+		global_position.x += target.global_position.x - pushbox_left
+	if target.global_position.x > pushbox_right:
+		global_position.x += target.global_position.x - pushbox_right
+	if target.global_position.z > pushbox_top:
+		global_position.z += target.global_position.z - pushbox_top
+	if target.global_position.z < pushbox_bottom:
+		global_position.z += target.global_position.z - pushbox_bottom
+	
 	super(delta)
 
 

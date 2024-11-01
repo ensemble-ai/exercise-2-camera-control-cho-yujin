@@ -156,6 +156,5 @@ noise = SubResource("FastNoiseLite_pu6hu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPlaylist_pjjl5")
-volume_db = -80.0
 autoplay = true
 bus = &"Music"

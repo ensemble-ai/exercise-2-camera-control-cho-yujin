@@ -4,7 +4,7 @@ extends CameraControllerBase
 
 @export var lead_speed:float = 25.0
 @export var catchup_delay_duration:float = 0.2
-@export var catchup_speed:float = 5
+@export var catchup_speed:float = 5.0
 @export var leash_distance:float = 6.0
 var _old_distance:Vector2 = Vector2(0.0, 0.0)
 var _timer:float = 0.0
@@ -22,8 +22,6 @@ func _process(delta: float) -> void:
 		
 	if draw_camera_logic:
 		draw_logic()
-	
-	# get player's position, velocity
 	
 	var target_direction:Vector3 = target.velocity.normalized()
 	# set camera to player's position (set x and z)
