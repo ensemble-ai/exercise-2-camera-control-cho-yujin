@@ -33,7 +33,8 @@ func _process(delta: float) -> void:
 		
 	if (distance - distance_to_move) > leash_distance:
 		distance_to_move = distance - leash_distance
-		
+	
+	# prevents camera from overshooting distance	
 	if distance_to_move > distance:
 		distance_to_move = distance
 	
@@ -41,31 +42,9 @@ func _process(delta: float) -> void:
 	if distance != 0:
 		weight = distance_to_move / distance
 	 
-	#print("%f: distance to move, %f: distance" % [distance_to_move, distance])
-	
 	var position_lock_lerp = global_position_no_y.lerp(target_position_no_y, weight)
 	global_position.x = position_lock_lerp.x
 	global_position.z = position_lock_lerp.z
-	
-	#var weight:float = follow_speed
-	#if target.velocity == Vector3.ZERO:
-		#weight = catchup_speed
-		
-	#var position_lock_lerp = global_position.lerp(target.global_position, weight)
-	#global_position.x = position_lock_lerp.x
-	#global_position.z = position_lock_lerp.z
-	#
-	#var global_position_no_y:Vector3 = Vector3(global_position)
-	#global_position_no_y.y = 0
-	#
-	#if global_position_no_y.distance_to(target.global_position) > leash_distance:
-		#var distance_to_move = global_position_no_y.distance_to(target.global_position) - leash_distance
-		#var leash_weight = distance_to_move / (distance_to_move + leash_distance)
-		#
-		#var leash_lerp = global_position.lerp(target.global_position, leash_weight)
-		#
-		#global_position.x = leash_lerp.x
-		#global_position.z = leash_lerp.z
 	
 	super(delta)
 	
