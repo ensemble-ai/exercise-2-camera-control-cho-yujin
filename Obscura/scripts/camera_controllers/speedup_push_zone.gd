@@ -8,6 +8,7 @@ extends CameraControllerBase
 @export var speedup_zone_top_left:Vector2 = Vector2(-6, 4)
 @export var speedup_zone_bottom_right:Vector2 = Vector2(6, -3)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -43,10 +44,10 @@ func _process(delta: float) -> void:
 	global_position.z += camera_speed.z
 	
 	# outer pushbox logic
-	var pushbox_left = pushbox_top_left.x + global_position.x
-	var pushbox_right = pushbox_bottom_right.x + global_position.x
-	var pushbox_top = pushbox_top_left.y + global_position.z
-	var pushbox_bottom = pushbox_bottom_right.y + global_position.z
+	var pushbox_left:float = pushbox_top_left.x + global_position.x
+	var pushbox_right:float = pushbox_bottom_right.x + global_position.x
+	var pushbox_top:float = pushbox_top_left.y + global_position.z
+	var pushbox_bottom:float = pushbox_bottom_right.y + global_position.z
 	
 	if target.global_position.x < pushbox_left:
 		global_position.x += target.global_position.x - pushbox_left

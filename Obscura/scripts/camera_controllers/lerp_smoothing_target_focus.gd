@@ -9,6 +9,7 @@ extends CameraControllerBase
 var _old_distance:Vector2 = Vector2(0.0, 0.0)
 var _timer:float = 0.0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -24,22 +25,25 @@ func _process(delta: float) -> void:
 		draw_logic()
 	
 	var target_direction:Vector3 = target.velocity.normalized()
+	
 	# set camera to player's position (set x and z)
 	global_position.x = target.global_position.x
 	global_position.z = target.global_position.z
+	
 	# move camera by old distance between camera and player
 	global_position.x += _old_distance.x
 	global_position.z += _old_distance.y
+	
 	# move camera to player's velocity (vector addition)
 	global_position.x += lead_speed * target_direction.x * delta
 	global_position.z += lead_speed * target_direction.z * delta
 	
+	# leashing logic
 	var global_position_no_y:Vector3 = Vector3(global_position)
 	var target_position_no_y:Vector3 = Vector3(target.global_position)
 	global_position_no_y.y = 0
 	target_position_no_y.y = 0
 	
-	# leashing logic
 	var distance:float = global_position_no_y.distance_to(target_position_no_y)
 	
 	var distance_to_move:float = 0.0
@@ -51,7 +55,6 @@ func _process(delta: float) -> void:
 	if _timer <= 0:
 		distance_to_move = catchup_speed * delta
 	
-	# prevents camera from overshooting distance	
 	if distance_to_move > distance:
 		distance_to_move = distance
 		
@@ -66,7 +69,7 @@ func _process(delta: float) -> void:
 	global_position.x = position_lock_lerp.x
 	global_position.z = position_lock_lerp.z
 	
-	# remember distance (a vector) between camera and player
+	# remember distance (a vector) between camera and player for next delta
 	_old_distance.x = global_position.x - target.global_position.x
 	_old_distance.y = global_position.z - target.global_position.z
 	

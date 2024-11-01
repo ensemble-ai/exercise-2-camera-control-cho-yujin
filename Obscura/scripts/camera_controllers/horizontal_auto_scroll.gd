@@ -20,10 +20,12 @@ func _process(delta: float) -> void:
 		
 	if draw_camera_logic:
 		draw_logic()
-		
+	
+	# set autoscroll
 	global_position.x += autoscroll_speed.x * delta
 	global_position.z += autoscroll_speed.z * delta
 	
+	# prevents target from exiting box
 	if target.global_position.x < global_position.x + top_left.x:
 		target.global_position.x = global_position.x + top_left.x
 		

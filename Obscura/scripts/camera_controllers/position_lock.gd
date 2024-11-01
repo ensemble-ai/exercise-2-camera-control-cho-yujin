@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	if draw_camera_logic:
 		draw_logic()
 	
+	# changes camera's x and z to match target's x and z
 	global_position.x = target.global_position.x
 	global_position.z = target.global_position.z
 	

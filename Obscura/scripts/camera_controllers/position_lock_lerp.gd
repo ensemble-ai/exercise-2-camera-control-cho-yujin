@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 		
 	if draw_camera_logic:
 		draw_logic()
-		
+	
 	var global_position_no_y:Vector3 = Vector3(global_position)
 	var target_position_no_y:Vector3 = Vector3(target.global_position)
 	global_position_no_y.y = 0
@@ -30,11 +30,12 @@ func _process(delta: float) -> void:
 	var distance_to_move:float = follow_speed * delta
 	if target.velocity == Vector3.ZERO:
 		distance_to_move = catchup_speed * delta
-		
+	
+	# prevents target from exceeding the leash distance
 	if (distance - distance_to_move) > leash_distance:
 		distance_to_move = distance - leash_distance
 	
-	# prevents camera from overshooting distance	
+	# prevents camera from overshooting distance near the camera's center
 	if distance_to_move > distance:
 		distance_to_move = distance
 	
